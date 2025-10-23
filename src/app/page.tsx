@@ -74,7 +74,7 @@ export default function HomePage() {
     pagination={{ clickable: true }}
     effect="fade"
     loop
-    speed={1200}
+    speed={1500}
     className="w-full h-full"
   >
     {[
@@ -88,39 +88,75 @@ export default function HomePage() {
           initial={{ scale: 1.05, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
           className="relative w-full h-[90vh]"
         >
-          {/* Background Image */}
-          <img
+          {/* Background Image with Smooth Zoom */}
+          <motion.img
             src={slide.src}
             alt={slide.caption}
-            className="w-full h-full object-cover transition-transform duration-[3000ms] ease-in-out transform hover:scale-105"
+            className="w-full h-full object-cover"
             loading="lazy"
+            initial={{ scale: 1.15 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 4, ease: "easeOut" }}
           />
 
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/40" />
+          {/* Transparent Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-800/20 via-transparent to-gray-900/30 mix-blend-overlay"></div>
 
-          {/* Centered Text */}
+          {/* Animated Text Content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-5xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-[2px_2px_8px_rgba(0,0,0,0.9)]"
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight drop-shadow-[3px_3px_10px_rgba(0,0,0,0.9)]"
             >
-              Wellness Health Care LLC
+                <motion.h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-[2px_2px_8px_rgba(0,0,0,0.9)]">
+  {"Wellness Health Care LLC".split("").map((char, index) => (
+    <motion.span
+      key={index}
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        delay: index * 0.05, // staggered appearance
+        duration: 1.5,
+        repeat: Infinity,
+        repeatType: "mirror",
+      }}
+      className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-white to-teal-100"
+    >
+      {char === " " ? "\u00A0" : char}
+    </motion.span>
+  ))}
+</motion.h1>
+
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="mt-6 text-lg md:text-2xl text-gray-100 max-w-2xl leading-relaxed"
+              transition={{ duration: 1.2, delay: 0.7 }}
+              className="mt-6 text-lg md:text-2xl text-gray-100 max-w-2xl leading-relaxed italic"
             >
               {slide.caption}
             </motion.p>
+
+            {/* Optional subtle floating effect */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="mt-8"
+            >
+              <a
+                href="/services"
+                className="px-8 py-4 bg-white/90 text-teal-900 font-semibold rounded-full shadow-lg hover:bg-teal-100 transition-all duration-300"
+              >
+                Explore Our Services
+              </a>
+            </motion.div>
           </div>
         </motion.div>
       </SwiperSlide>
@@ -129,7 +165,7 @@ export default function HomePage() {
 </section>
 
 {/* ===================== PERSISTENT INFINITE CURVED SHAPE ===================== */}
-<div className="relative w-full h-[180px] overflow-hidden bg-white dark:bg-gray-950">
+<div className="relative w-full h-[120px] overflow-hidden bg-white dark:bg-gray-950">
   <div className="absolute bottom-0 left-0 w-[200%] h-[180px]">
     {/* Gradient Wave (background) */}
     <svg
@@ -190,7 +226,8 @@ export default function HomePage() {
 {/* ===================== Features Section ===================== */}
 <section className="py-14 md:py-18 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
   <div className="container mx-auto px-4 lg:px-20">
-    {/* Section Header */}
+    
+    {/* ===================== Section Header ===================== */}
     <div className="text-center mb-14 md:mb-18">
       <motion.h2
         className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
@@ -212,66 +249,134 @@ export default function HomePage() {
       </motion.p>
     </div>
 
-    {/* Feature Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-10">
-      {features.map((feature, index) => (
-        <motion.div
-          key={feature.title}
-          className="relative group rounded-3xl shadow-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-3xl transition-transform duration-500"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.15 }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.02, rotateX: 3, rotateY: -3 }}
-        >
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-teal-400 via-teal-500 to-teal-600 opacity-0 group-hover:opacity-100 blur-lg transition duration-500"></div>
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 md:p-10">
+    {/* ===================== Features Grid ===================== */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {features.map((feature, index) => {
+        const Icon = feature.icon
+        return (
+          <motion.div
+            key={feature.title}
+            className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 flex items-start gap-4"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+          >
+            {/* Icon */}
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-teal-100 dark:bg-teal-900 group-hover:scale-110 transition-transform duration-500">
-                <feature.icon className="h-10 w-10 text-teal-600 dark:text-teal-400" />
+              <div className="bg-teal-100 dark:bg-teal-900 rounded-full p-4 flex items-center justify-center shadow-md group-hover:shadow-xl transition-all duration-500">
+                <Icon className="w-8 h-8 text-teal-600 dark:text-teal-300" />
               </div>
             </div>
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+
+            {/* Text */}
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
                 {feature.title}
               </h3>
-              <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl">
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-snug">
                 {feature.description}
               </p>
             </div>
-          </div>
-        </motion.div>
-      ))}
+
+            {/* Optional subtle gradient overlay glow */}
+            <div className="absolute inset-0 rounded-2xl pointer-events-none bg-gradient-to-tr from-teal-400 via-teal-500 to-teal-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+          </motion.div>
+        )
+      })}
     </div>
   </div>
 </section>
-
 {/* ===================== Services Section ===================== */}
-<section className="py-12 md:py-15 bg-white dark:bg-gray-900">
-  <div className="container mx-auto px-6 lg:px-12">
-    <div className="text-center mb-12 md:mb-16">
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        Our PASA Services
-      </motion.h2>
-      <motion.p
-        className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        From residential care to community integration, we help individuals thrive with dignity and independence.
-      </motion.p>
+<section className="relative py-24 bg-gradient-to-b from-white via-teal-50 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 overflow-hidden">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(13,148,136,0.15),transparent_70%)]"></div>
+  <div className="container relative z-10 mx-auto px-6 lg:px-12">
+    {/* ========== Header ========== */}
+    <motion.div
+      className="text-center mb-20"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        Our Comprehensive PASA Services
+      </h2>
+      <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Every service we provide is built around compassion, inclusion,
+        and a commitment to helping every individual thrive.
+      </p>
+    </motion.div>
+
+    {/* ========== Services Listing (First 3 from Services Page) ========== */}
+    <div className="space-y-20">
+      {[
+        {
+          title: "Personal Care",
+          description:
+            "We provide compassionate assistance with daily living activities helping each individual maintain dignity, comfort, and independence.",
+          icon: HeartHandshake,
+        },
+        {
+          title: "Pre-Vocational Services & Supported Employment",
+          description:
+            "Our team empowers members to develop skills, explore job opportunities, and thrive in meaningful employment within their communities.",
+          icon: Users,
+        },
+        {
+          title: "Residential Services & Support Homes",
+          description:
+            "Safe, nurturing, and person-centered homes that foster independence, inclusion, and a true sense of belonging.",
+          icon: Home,
+        },
+      ].map((service, index) => {
+        const Icon = service.icon
+        return (
+          <motion.div
+            key={index}
+            className={`flex flex-col md:flex-row items-center gap-10 ${
+              index % 2 === 0
+                ? "md:flex-row"
+                : "md:flex-row-reverse md:text-right"
+            }`}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+          >
+            {/* ===== Icon Circle ===== */}
+            <div className="relative flex-shrink-0">
+              <motion.div
+                className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-lg rounded-full p-10 shadow-xl border border-teal-200 dark:border-teal-700 hover:shadow-2xl transition-all"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Icon className="w-14 h-14 text-teal-700 dark:text-teal-300" />
+              </motion.div>
+              <div className="absolute inset-0 blur-2xl bg-teal-400/20 rounded-full -z-10"></div>
+            </div>
+
+            {/* ===== Text ===== */}
+            <div className="max-w-xl">
+              <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-3">
+                {service.title}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                {service.description}
+              </p>
+            </div>
+          </motion.div>
+        )
+      })}
+    </div>
+
+    {/* ========== View All Button ========== */}
+    <div className="text-center mt-20">
       <Button
         asChild
         size="lg"
-        className="px-10 py-5 text-lg rounded-full shadow-xl hover:scale-110 transition-transform"
+        className="px-10 py-5 text-lg rounded-full shadow-2xl hover:scale-110 transition-transform bg-teal-600 text-white hover:bg-teal-700"
       >
         <Link href="/services">
           View All Services
@@ -279,25 +384,9 @@ export default function HomePage() {
         </Link>
       </Button>
     </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-      {SERVICES.slice(0, 3).map((service, index) => (
-        <motion.div
-          key={service.id}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.15 }}
-          viewport={{ once: true }}
-        >
-          <ServiceCard
-            {...service}
-            className="rounded-3xl shadow-xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-3"
-          />
-        </motion.div>
-      ))}
-    </div>
   </div>
 </section>
+
 {/* ===================== Huge Image Gallery ===================== */}
 <section className="py-24 bg-gray-100 dark:bg-gray-800">
   <div className="container mx-auto px-6 lg:px-12">
