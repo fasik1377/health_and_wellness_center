@@ -12,50 +12,64 @@ import {
   Sparkles,
 } from "lucide-react"
 
+// Updated services array with new content
 const services = [
   {
-    title: "Personal Care",
+    title: "Self-Advocacy Training",
     description:
-      "We provide compassionate assistance with daily living activities helping each individual maintain dignity, comfort, and independence.",
+      "Empowering individuals to speak up for themselves, make informed decisions, and actively participate in shaping their own lives.",
     icon: HeartHandshake,
   },
   {
-    title: "Pre-Vocational Services & Supported Employment",
+    title: "Independent Living Skills Training",
     description:
-      "Our team empowers members to develop skills, explore job opportunities, and thrive in meaningful employment within their communities.",
+      "Helping individuals build essential daily living skills that promote confidence, autonomy, and a more independent lifestyle.",
     icon: Users,
   },
   {
-    title: "Residential Services & Support Homes",
+    title: "Cognitive Skills Training",
     description:
-      "Safe, nurturing, and person-centered homes that foster independence, inclusion, and a true sense of belonging.",
+      "Supporting the development of memory, problem‑solving, attention, and decision‑making skills for greater personal growth.",
     icon: Home,
   },
   {
-    title: "Homemaker Services (Basic & Enhanced)",
+    title: "Therapeutic & Behavioral Support",
     description:
-      "Helping individuals maintain a clean, safe, and comfortable home environment — from light cleaning to meal preparation.",
+      "Providing guidance and structured support for individuals needing assistance with therapeutic goals or behavioral interventions.",
     icon: HandHeart,
   },
   {
-    title: "Behavioral Services",
+    title: "Routine Medical & Health Care Support",
     description:
-      "Personalized support to promote emotional wellness, adaptive behavior, and positive relationships for overall wellbeing.",
+      "Offering help with routine health needs, wellness reminders, and medical coordination to ensure ongoing wellbeing.",
     icon: Brain,
   },
   {
-    title: "Supported Community Connection",
+    title: "Emergency Assistance Training",
     description:
-      "Encouraging active participation in community life through social, recreational, and volunteer engagement opportunities.",
+      "Training individuals to respond safely and effectively in emergencies, helping them stay prepared and confident.",
     icon: Globe,
   },
   {
-    title: "Mentorship",
+    title: "Community Access Support",
     description:
-      "Guiding individuals through personal growth and skill development, building confidence and meaningful relationships.",
+      "Assisting individuals in engaging with their community, building relationships, and accessing meaningful activities and resources.",
     icon: Sparkles,
   },
-]
+  {
+    title: "Travel & Transportation Assistance",
+    description:
+      "Helping individuals navigate transportation safely and independently, supporting community participation and mobility.",
+    icon: Users,
+  },
+  {
+    title: "Supervision for Health & Welfare",
+    description:
+      "Ensuring safety, wellbeing, and support through attentive supervision tailored to each individual's needs.",
+    icon: HeartHandshake,
+  },
+];
+
 
 export default function ServicesPage() {
   return (

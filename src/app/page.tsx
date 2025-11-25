@@ -308,68 +308,66 @@ export default function HomePage() {
         and a commitment to helping every individual thrive.
       </p>
     </motion.div>
-
-    {/* ========== Services Listing (First 3 from Services Page) ========== */}
-    <div className="space-y-20">
-      {[
-        {
-          title: "Personal Care",
-          description:
-            "We provide compassionate assistance with daily living activities helping each individual maintain dignity, comfort, and independence.",
-          icon: HeartHandshake,
-        },
-        {
-          title: "Pre-Vocational Services & Supported Employment",
-          description:
-            "Our team empowers members to develop skills, explore job opportunities, and thrive in meaningful employment within their communities.",
-          icon: Users,
-        },
-        {
-          title: "Residential Services & Support Homes",
-          description:
-            "Safe, nurturing, and person-centered homes that foster independence, inclusion, and a true sense of belonging.",
-          icon: Home,
-        },
-      ].map((service, index) => {
-        const Icon = service.icon
-        return (
+<div className="space-y-20">
+  {[
+    {
+      title: "Self-Advocacy Training",
+      description:
+        "Empowering individuals to speak up for themselves, make informed decisions, and actively participate in shaping their own lives.",
+      icon: HeartHandshake,
+    },
+    {
+      title: "Independent Living Skills Training",
+      description:
+        "Helping individuals build essential daily living skills that promote confidence, autonomy, and a more independent lifestyle.",
+      icon: Users,
+    },
+    {
+      title: "Cognitive Skills Training",
+      description:
+        "Supporting the development of memory, problem-solving, attention, and decision-making skills for greater personal growth.",
+      icon: Home,
+    },
+  ].map((service, index) => {
+    const Icon = service.icon
+    return (
+      <motion.div
+        key={index}
+        className={`flex flex-col md:flex-row items-center gap-10 ${
+          index % 2 === 0
+            ? "md:flex-row"
+            : "md:flex-row-reverse md:text-right"
+        }`}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
+        viewport={{ once: true }}
+      >
+        {/* ===== Icon Circle ===== */}
+        <div className="relative flex-shrink-0">
           <motion.div
-            key={index}
-            className={`flex flex-col md:flex-row items-center gap-10 ${
-              index % 2 === 0
-                ? "md:flex-row"
-                : "md:flex-row-reverse md:text-right"
-            }`}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            viewport={{ once: true }}
+            className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-lg rounded-full p-10 shadow-xl border border-teal-200 dark:border-teal-700 hover:shadow-2xl transition-all"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
           >
-            {/* ===== Icon Circle ===== */}
-            <div className="relative flex-shrink-0">
-              <motion.div
-                className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-lg rounded-full p-10 shadow-xl border border-teal-200 dark:border-teal-700 hover:shadow-2xl transition-all"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Icon className="w-14 h-14 text-teal-700 dark:text-teal-300" />
-              </motion.div>
-              <div className="absolute inset-0 blur-2xl bg-teal-400/20 rounded-full -z-10"></div>
-            </div>
-
-            {/* ===== Text ===== */}
-            <div className="max-w-xl">
-              <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-3">
-                {service.title}
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                {service.description}
-              </p>
-            </div>
+            <Icon className="w-14 h-14 text-teal-700 dark:text-teal-300" />
           </motion.div>
-        )
-      })}
-    </div>
+          <div className="absolute inset-0 blur-2xl bg-teal-400/20 rounded-full -z-10"></div>
+        </div>
+
+        {/* ===== Text ===== */}
+        <div className="max-w-xl">
+          <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-3">
+            {service.title}
+          </h3>
+          <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+            {service.description}
+          </p>
+        </div>
+      </motion.div>
+    )
+  })}
+</div>
 
     {/* ========== View All Button ========== */}
     <div className="text-center mt-20">
