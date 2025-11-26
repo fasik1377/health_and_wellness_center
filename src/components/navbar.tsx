@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Sun, Moon, Facebook, Instagram, Linkedin, Twitter, Phone, Mail } from "lucide-react"
+import { Menu, X, Sun, Moon, Facebook, Instagram, Linkedin, Phone, Mail } from "lucide-react"
 import Image from "next/image"
 import { Button } from "./ui/button"
 import { useTheme } from "./theme-provider"
@@ -66,7 +66,7 @@ export function Navbar() {
         <Facebook className="h-5 w-5" />
       </a>
       <a
-        href="https://instagram.com"
+        href="https://www.instagram.com/wellness_colorado?igsh=cXFjZDI5Zzh6cnMy"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
@@ -84,14 +84,19 @@ export function Navbar() {
         <Linkedin className="h-5 w-5" />
       </a>
       <a
-        href="https://x.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Twitter/X"
-        className="hover:text-gray-100 transition-colors"
-      >
-        <Twitter className="h-5 w-5" />
-      </a>
+  href="http://tiktok.com/@wellnesshealthcare2025"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="TikTok"
+  className="hover:opacity-80 transition-opacity flex items-center"
+>
+  <img
+    src="/images/tiktok.png"
+    alt="TikTok"
+    className="h-8 w-8 object-contain -mt-1" // moves it up slightly
+  />
+</a>
+
     </div>
   </div>
 </div>

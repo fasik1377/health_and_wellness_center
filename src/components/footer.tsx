@@ -29,7 +29,7 @@ export function Footer() {
   <Facebook className="h-5 w-5" />
 </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/wellness_colorado?igsh=cXFjZDI5Zzh6cnMy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-teal-400 transition-colors"
@@ -46,16 +46,20 @@ export function Footer() {
 >
   <Linkedin className="h-5 w-5" />
 </a>
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-teal-400 transition-colors"
-                aria-label="X"
-              >
-                {/* Using Twitter icon but for X */}
-                <Twitter className="h-5 w-5" />
-              </a>
+<a
+  href="http://tiktok.com/@wellnesshealthcare2025"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-gray-400 hover:opacity-80 transition-opacity flex items-center"
+  aria-label="TikTok"
+>
+  <img
+    src="/images/tiktok.png"
+    alt="TikTok"
+    className="h-7 w-7 object-contain -mt-1"
+  />
+</a>
+
             </div>
           </div>
 
