@@ -12,198 +12,258 @@ import { cn } from "@/lib/utils"
 
 // ✅ Add FAQ to the navigation
 const NAVIGATION = [
-  ...BASE_NAV,
-  { name: "FAQ", href: "/faq" }, // New FAQ Menu Item
+    ...BASE_NAV,
+    { name: "FAQ", href: "/faq" }, // New FAQ Menu Item
 ]
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const pathname = usePathname()
-  const { theme, setTheme } = useTheme()
+    const [isOpen, setIsOpen] = React.useState(false)
+    const pathname = usePathname()
+    const { theme, setTheme } = useTheme()
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light")
-  }
+    const toggleTheme = () => {
+        setTheme(theme === "light" ? "dark" : "light")
+    }
 
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/"
-    return pathname.startsWith(href)
-  }
+    const isActive = (href: string) => {
+        if (href === "/") return pathname === "/"
+        return pathname.startsWith(href)
+    }
 
-  return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/90 backdrop-blur-md dark:bg-gray-900/90 shadow-md transition-all">
-{/* ===================== Top Info Bar ===================== */}
-<div className="bg-teal-600 text-white text-base">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between py-4 space-y-3 md:space-y-0">
-    
-    {/* Left: Contact Info */}
-    <div className="flex flex-col md:flex-row md:items-center md:space-x-8 text-center md:text-left">
-      <a
-        href="tel:+17205521710"
-        className="flex items-center justify-center space-x-2 hover:text-gray-100 transition-colors"
-      >
-        <Phone className="h-5 w-5" />
-        <span className="font-medium">+1 720 552 1710</span>
-      </a>
-      <a
-        href="mailto:Wellnesshealthcare2025@gmail.com"
-        className="flex items-center justify-center space-x-2 hover:text-gray-100 transition-colors"
-      >
-        <Mail className="h-5 w-5" />
-        <span className="font-medium">Wellnesshealthcare2025@gmail.com</span>
-      </a>
-    </div>
+    return (
+        <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-white/80 backdrop-blur-xl dark:bg-gray-900/80 transition-all">
 
-    {/* Right: Social Media Links */}
-    <div className="flex space-x-5 justify-center md:justify-end">
-      <a
-        href="https://www.facebook.com/profile.php?id=61582141343241"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Facebook"
-        className="hover:text-gray-100 transition-colors"
-      >
-        <Facebook className="h-5 w-5" />
-      </a>
-      <a
-        href="https://www.instagram.com/wellness_colorado?igsh=cXFjZDI5Zzh6cnMy"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-        className="hover:text-gray-100 transition-colors"
-      >
-        <Instagram className="h-5 w-5" />
-      </a>
-      <a
-        href="https://www.linkedin.com/company/wellness-health-care-llc/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        className="hover:text-gray-100 transition-colors"
-      >
-        <Linkedin className="h-5 w-5" />
-      </a>
-      <a
-  href="http://tiktok.com/@wellnesshealthcare2025"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="TikTok"
-  className="hover:opacity-80 transition-opacity flex items-center"
->
-  <img
-    src="/images/tiktok.png"
-    alt="TikTok"
-    className="h-8 w-8 object-contain -mt-1" // moves it up slightly
-  />
-</a>
+            {/* ===================== Top Info Bar ===================== */}
 
-    </div>
-  </div>
-</div>
-{/* ===================== End Top Info Bar ===================== */}
+            <div className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between py-3 space-y-2 md:space-y-0">
 
+                    {/* Contact Info */}
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo + Site Name */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="images/logo.png"
-              alt="Wellness Health Care Logo"
-              width={50}
-              height={50}
-              className="h-16 w-16 object-contain"
-              priority
-            />
-            <span className="font-bold text-lg md:text-xl text-teal-600 dark:text-teal-400 tracking-wide">
-              Wellness Health Care LLC
-            </span>
-          </Link>
+                    <div className="flex flex-col md:flex-row md:items-center md:space-x-6 text-center md:text-left">
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {NAVIGATION.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "relative text-sm font-medium transition-colors hover:text-teal-600 dark:hover:text-teal-400",
-                  isActive(item.href)
-                    ? "text-teal-600 dark:text-teal-400 after:w-full"
-                    : "text-gray-600 dark:text-gray-300 after:w-0",
-                  "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-teal-600 after:transition-all after:duration-300"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
-            {/* CTA Button */}
-            <Button
-              asChild
-              size="sm"
-              className="ml-4 bg-teal-600 text-white hover:bg-teal-700 dark:bg-teal-400 dark:text-gray-900 dark:hover:bg-teal-500 transition-transform hover:scale-105"
-            >
-              <Link href="/contact">Request Services</Link>
-            </Button>
-          </nav>
+                        <a
+                            href="tel:+17205521710"
+                            className="flex items-center justify-center space-x-2 hover:opacity-90 transition"
+                        >
+                            <Phone className="h-4 w-4" />
+                            <span className="font-medium">+1 720 552 1710</span>
+                        </a>
 
-          {/* Theme Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-9 w-9"
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-            </Button>
+                        <a
+                            href="mailto:Wellnesshealthcare2025@gmail.com"
+                            className="flex items-center justify-center space-x-2 hover:opacity-90 transition"
+                        >
+                            <Mail className="h-4 w-4" />
+                            <span className="font-medium">wellnesshealthcare2025@gmail.com</span>
+                        </a>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden h-9 w-9"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
-        </div>
+                    </div>
 
-        {/* Mobile Navigation */}
-        <div
-          className={cn(
-            "md:hidden transition-all duration-300 overflow-hidden",
-            isOpen ? "max-h-screen py-4" : "max-h-0"
-          )}
-        >
-          <div className="px-2 space-y-2">
-            {NAVIGATION.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "block px-3 py-2 text-base font-medium rounded-lg transition-colors hover:bg-teal-100 dark:hover:bg-gray-700",
-                  isActive(item.href)
-                    ? "bg-teal-50 text-teal-600 dark:bg-teal-800 dark:text-teal-400"
-                    : "text-gray-700 dark:text-gray-300"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Button
-              asChild
-              size="sm"
-              className="w-full mt-2 bg-teal-600 text-white hover:bg-teal-700 dark:bg-teal-400 dark:text-gray-900 dark:hover:bg-teal-500"
-            >
-              <Link href="/contact">Request Services</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </header>
-  )
+                    {/* Social Links */}
+
+                    <div className="flex items-center space-x-4">
+
+                        <a
+                            href="https://www.facebook.com/profile.php?id=61582141343241"
+                            target="_blank"
+                            className="hover:scale-110 transition"
+                        >
+                            <Facebook className="h-4 w-4" />
+                        </a>
+
+                        <a
+                            href="https://www.instagram.com/wellness_colorado"
+                            target="_blank"
+                            className="hover:scale-110 transition"
+                        >
+                            <Instagram className="h-4 w-4" />
+                        </a>
+
+                        <a
+                            href="https://www.linkedin.com/company/wellness-health-care-llc/"
+                            target="_blank"
+                            className="hover:scale-110 transition"
+                        >
+                            <Linkedin className="h-4 w-4" />
+                        </a>
+
+                        <a
+                            href="http://tiktok.com/@wellnesshealthcare2025"
+                            target="_blank"
+                            className="hover:scale-110 transition"
+                        >
+                            <Image
+                                src="/images/tiktok.png"
+                                alt="TikTok"
+                                width={20}
+                                height={20}
+                            />
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            {/* ===================== Main Navbar ===================== */}
+
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div className="flex h-20 items-center justify-between">
+
+                    {/* Logo */}
+
+                    <Link href="/" className="flex items-center space-x-3">
+
+                        <Image
+                            src="/images/logo.png"
+                            alt="Wellness Health Care"
+                            width={60}
+                            height={60}
+                            className="object-contain"
+                        />
+
+                        <span className="font-semibold text-lg md:text-xl text-teal-600 dark:text-teal-400 tracking-wide">
+                            Wellness Health Care
+                        </span>
+
+                    </Link>
+
+                    {/* Desktop Menu */}
+
+                    <nav className="hidden md:flex items-center space-x-8">
+
+                        {NAVIGATION.map((item) => (
+
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={cn(
+                                    "group relative text-sm font-medium transition-colors duration-300",
+                                    isActive(item.href)
+                                        ? "text-teal-600 dark:text-teal-400"
+                                        : "text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400"
+                                )}
+                            >
+
+                                {item.name}
+
+                                <span
+                                    className={cn(
+                                        "absolute left-0 -bottom-2 h-[2px] bg-teal-600 transition-all duration-300",
+                                        isActive(item.href)
+                                            ? "w-full"
+                                            : "w-0 group-hover:w-full"
+                                    )}
+                                ></span>
+
+                            </Link>
+
+                        ))}
+
+                        {/* CTA */}
+
+                        <Button
+                            asChild
+                            className="ml-4 rounded-full px-6 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white shadow-none transition-transform hover:scale-105"
+                        >
+
+                            <Link href="/contact">
+                                Request Services
+                            </Link>
+
+                        </Button>
+
+                    </nav>
+
+                    {/* Right Controls */}
+
+                    <div className="flex items-center space-x-3">
+
+                        {/* Theme Toggle */}
+
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={toggleTheme}
+                            className="h-9 w-9 rounded-full"
+                        >
+
+                            {theme === "light"
+                                ? <Moon className="h-4 w-4" />
+                                : <Sun className="h-4 w-4" />}
+
+                        </Button>
+
+                        {/* Mobile Menu */}
+
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="md:hidden h-9 w-9"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+
+                            {isOpen
+                                ? <X className="h-5 w-5" />
+                                : <Menu className="h-5 w-5" />}
+
+                        </Button>
+
+                    </div>
+
+                </div>
+
+                {/* ===================== Mobile Menu ===================== */}
+
+                <div
+                    className={cn(
+                        "md:hidden overflow-hidden transition-all duration-300",
+                        isOpen ? "max-h-screen pb-6" : "max-h-0"
+                    )}
+                >
+
+                    <div className="pt-4 space-y-2">
+
+                        {NAVIGATION.map((item) => (
+
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={cn(
+                                    "block px-4 py-3 rounded-lg text-base font-medium transition",
+                                    isActive(item.href)
+                                        ? "bg-teal-50 text-teal-600 dark:bg-teal-900 dark:text-teal-400"
+                                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                )}
+                                onClick={() => setIsOpen(false)}
+                            >
+
+                                {item.name}
+
+                            </Link>
+
+                        ))}
+
+                        <Button
+                            asChild
+                            className="w-full mt-3 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white"
+                        >
+
+                            <Link href="/contact">
+                                Request Services
+                            </Link>
+
+                        </Button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+    )
 }

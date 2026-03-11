@@ -14,10 +14,10 @@
     "deploy": "npm run build && npm run export"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "framer-motion": "^11.2.4",
-    "lucide-react": "^0.400.0",
     "@radix-ui/react-slot": "^1.2.3",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^0.400.0",
     "next": "14.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
