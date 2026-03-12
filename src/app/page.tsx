@@ -180,7 +180,7 @@ export default function HomePage() {
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.8 }}
-                                    className="absolute bottom-24 left-10 hidden lg:block"
+                                    className="absolute bottom-12 left-40 hidden lg:block"
                                 >
 
                                     <div className="backdrop-blur-md bg-white/20 border border-white/30 text-white px-6 py-4 rounded-2xl shadow-xl">
@@ -269,37 +269,24 @@ export default function HomePage() {
 
                 {/* ================= CURVED DIVIDER ================= */}
 
-                <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-
-                    <svg
-                        className="relative block w-[calc(100%+1.3px)] h-[120px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1200 120"
-                        preserveAspectRatio="none"
-                    >
-
-                        <path
-                            d="M0,0V46.29c47.79,22,103.59,32.17,158,28,
-70.36-5.37,136.33-33.31,206.8-37.5C438.64,32,
-512.34,53.67,583,72.05c69.27,18,138.3,24.88,
-209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,
-25,1113-7.44,1200,2.44V0Z"
-                            className="fill-white"
-                        />
-
-                    </svg>
-
-                </div>
-
             </section>
-
 
             {/* ===================== PERSISTENT INFINITE CURVED SHAPE ===================== */}
             <div className="relative w-full h-[120px] overflow-hidden bg-white dark:bg-gray-950">
-                <div className="absolute bottom-0 left-0 w-[200%] h-[180px]">
+
+                <motion.div
+                    className="absolute bottom-0 left-0 w-[200%] h-[180px]"
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{
+                        duration: 22,
+                        ease: "linear",
+                        repeat: Infinity
+                    }}
+                >
+
                     {/* Gradient Wave (background) */}
                     <svg
-                        className="absolute bottom-0 left-0 w-[200%] h-[180px] animate-wave-slow"
+                        className="absolute bottom-0 left-0 w-[200%] h-[180px]"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 1440 320"
                         preserveAspectRatio="none"
@@ -311,47 +298,44 @@ export default function HomePage() {
                                 <stop offset="100%" stopColor="#0f766e" />
                             </linearGradient>
                         </defs>
+
                         <path
                             fill="url(#gradientCurve)"
                             d="M0,224L60,197.3C120,171,240,117,360,96C480,75,600,85,720,122.7C840,160,960,224,1080,234.7C1200,245,1320,203,1380,181.3L1440,160L1440,320L0,320Z"
                         />
                     </svg>
 
-                    {/* White Wave (foreground) */}
+                </motion.div>
+
+
+                {/* Foreground Wave */}
+                <motion.div
+                    className="absolute bottom-0 left-0 w-[200%] h-[180px] opacity-70"
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{
+                        duration: 14,
+                        ease: "linear",
+                        repeat: Infinity
+                    }}
+                >
+
                     <svg
-                        className="absolute bottom-0 left-0 w-[200%] h-[180px] opacity-70 animate-wave-fast"
+                        className="absolute bottom-0 left-0 w-[200%] h-[180px]"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 1440 320"
                         preserveAspectRatio="none"
                     >
+
                         <path
                             fill="#ffffff"
-                            fillOpacity="1"
                             d="M0,160L60,165.3C120,171,240,181,360,202.7C480,224,600,256,720,245.3C840,235,960,181,1080,154.7C1200,128,1320,128,1380,128L1440,128L1440,320L0,320Z"
                         />
+
                     </svg>
-                </div>
+
+                </motion.div>
+
             </div>
-
-            {/* ===================== CUSTOM ANIMATIONS ===================== */}
-            <style jsx>{`
-  @keyframes waveScroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-wave-slow {
-    animation: waveScroll 22s linear infinite;
-  }
-
-  .animate-wave-fast {
-    animation: waveScroll 14s linear infinite;
-  }
-`}</style>
             {/* ===================== Features Section ===================== */}
             <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-black">
                 <div className="container mx-auto px-4 lg:px-20">
@@ -515,7 +499,122 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
+            {/* ===================== CARE PROCESS ===================== */}
+            <section className="py-28 bg-gradient-to-b from-white via-teal-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
 
+                <div className="container mx-auto px-6 lg:px-12">
+
+                    {/* Header */}
+                    <div className="text-center mb-20">
+
+                        <motion.h2
+                            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                        >
+                            How Our Care Process Works
+                        </motion.h2>
+
+                        <motion.p
+                            className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            viewport={{ once: true }}
+                        >
+                            We follow a thoughtful and personalized process to ensure every
+                            individual receives the right care, support, and guidance.
+                        </motion.p>
+
+                    </div>
+
+
+                    {/* Cards */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                        {[
+                            {
+                                step: "01",
+                                title: "Initial Consultation",
+                                desc: "We meet with individuals and families to understand their needs and goals.",
+                                img: "/images/vision.jpg"
+                            },
+                            {
+                                step: "02",
+                                title: "Personalized Care Plan",
+                                desc: "Our team designs a customized support plan for each individual.",
+                                img: "/images/community_support.jpg"
+                            },
+                            {
+                                step: "03",
+                                title: "Dedicated Support",
+                                desc: "Our trained staff provide compassionate daily care and guidance.",
+                                img: "/images/bg2.jpg"
+                            },
+                            {
+                                step: "04",
+                                title: "Growth & Independence",
+                                desc: "We help individuals grow toward independence and a better life.",
+                                img: "/images/group_wellness.jpg"
+                            }
+                        ].map((item, index) => (
+
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: index * 0.15 }}
+                                viewport={{ once: true }}
+                                whileHover={{ scale: 1.05 }}
+                                className="relative h-[380px] rounded-2xl overflow-hidden shadow-2xl group cursor-pointer"
+                            >
+
+                                {/* Image */}
+                                <motion.img
+                                    src={item.img}
+                                    alt={item.title}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    whileHover={{ scale: 1.15 }}
+                                    transition={{ duration: 0.6 }}
+                                />
+
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+                                {/* Step Number */}
+                                <div className="absolute top-6 left-6 text-4xl font-bold text-white/80">
+                                    {item.step}
+                                </div>
+
+                                {/* Text */}
+                                <motion.div
+                                    initial={{ y: 40, opacity: 0 }}
+                                    whileInView={{ y: 0, opacity: 1 }}
+                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    className="absolute bottom-6 left-6 right-6 text-white"
+                                >
+
+                                    <h3 className="text-xl font-semibold mb-2">
+                                        {item.title}
+                                    </h3>
+
+                                    <p className="text-sm text-gray-200 leading-relaxed">
+                                        {item.desc}
+                                    </p>
+
+                                </motion.div>
+
+                            </motion.div>
+
+                        ))}
+
+                    </div>
+
+                </div>
+
+            </section>
             {/* ===================== Huge Image Gallery ===================== */}
             <section className="py-24 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
                 <div className="container mx-auto px-6 lg:px-12">
