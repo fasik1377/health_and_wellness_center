@@ -1,166 +1,172 @@
 "use client"
 
-import * as React from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
 import {
-  HeartHandshake,
-  Users,
-  Home,
-  HandHeart,
+  ArrowRight,
   Brain,
+  Bus,
+  CheckCircle2,
   Globe,
+  HandHeart,
+  HeartHandshake,
+  Home,
+  MessageCircle,
+  ShieldCheck,
   Sparkles,
+  Users,
 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-// Updated services array with new content
 const services = [
   {
     title: "Self-Advocacy Training",
     description:
-      "Empowering individuals to speak up for themselves, make informed decisions, and actively participate in shaping their own lives.",
+      "Support that helps individuals communicate preferences, make informed choices, and take a stronger role in daily life.",
     icon: HeartHandshake,
   },
   {
-    title: "Independent Living Skills Training",
+    title: "Independent Living Skills",
     description:
-      "Helping individuals build essential daily living skills that promote confidence, autonomy, and a more independent lifestyle.",
+      "Training for routines, decision-making, home responsibilities, and day-to-day confidence.",
     icon: Users,
   },
   {
     title: "Cognitive Skills Training",
     description:
-      "Supporting the development of memory, problem‑solving, attention, and decision‑making skills for greater personal growth.",
-    icon: Home,
-  },
-  {
-    title: "Therapeutic & Behavioral Support",
-    description:
-      "Providing guidance and structured support for individuals needing assistance with therapeutic goals or behavioral interventions.",
-    icon: HandHeart,
-  },
-  {
-    title: "Routine Medical & Health Care Support",
-    description:
-      "Offering help with routine health needs, wellness reminders, and medical coordination to ensure ongoing wellbeing.",
+      "Structured support for attention, memory, problem-solving, and practical thinking skills.",
     icon: Brain,
   },
   {
-    title: "Emergency Assistance Training",
+    title: "Therapeutic and Behavioral Support",
     description:
-      "Training individuals to respond safely and effectively in emergencies, helping them stay prepared and confident.",
+      "Guided support that helps individuals and families navigate behavioral and therapeutic goals more effectively.",
+    icon: HandHeart,
+  },
+  {
+    title: "Routine Health Support",
+    description:
+      "Care oversight and reminders that help maintain consistency with wellness and medical routines.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Community Access",
+    description:
+      "Encouragement and support for participation in meaningful community activities and connections.",
     icon: Globe,
   },
   {
-    title: "Community Access Support",
+    title: "Transportation Assistance",
     description:
-      "Assisting individuals in engaging with their community, building relationships, and accessing meaningful activities and resources.",
-    icon: Sparkles,
+      "Travel-related support that helps individuals move through the community with greater confidence and safety.",
+    icon: Bus,
   },
   {
-    title: "Travel & Transportation Assistance",
+    title: "Health and Welfare Supervision",
     description:
-      "Helping individuals navigate transportation safely and independently, supporting community participation and mobility.",
-    icon: Users,
+      "Attentive supervision designed around safety, stability, and respectful support.",
+    icon: Home,
   },
-  {
-    title: "Supervision for Health & Welfare",
-    description:
-      "Ensuring safety, wellbeing, and support through attentive supervision tailored to each individual's needs.",
-    icon: HeartHandshake,
-  },
-];
+]
 
+const serviceHighlights = [
+  "Person-centered service planning",
+  "Colorado PASA support structure",
+  "Family communication and coordination",
+]
+
+const supportPathHighlights = [
+  "Service fit",
+  "Referral questions",
+  "Next-step guidance",
+]
 
 export default function ServicesPage() {
   return (
     <div className="flex flex-col">
-      {/* ===================== Hero Section ===================== */}
-      <section className="relative py-32 bg-gradient-to-br from-teal-700 via-teal-800 to-gray-900 text-white overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30 animate-pulse"
-          style={{ backgroundImage: "url('../../images/care.jpg')" }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent"></div>
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#2aa198_0%,#135f59_42%,#091311_100%)] py-24 text-white">
+        <div className="brand-aurora absolute inset-0" />
+        <div className="hero-grid absolute inset-0 opacity-25" />
+        <div className="absolute inset-0 opacity-15">
+          <Image src="/images/care.jpg" alt="Care support" fill priority className="object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,20,19,0.08),rgba(6,20,19,0.74))]" />
 
-        <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
-          <motion.h1
-            className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-white to-teal-100"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Empowering Lives with <br />
-            <span className="text-teal-300">Compassionate PASA Care</span>
-          </motion.h1>
+        <div className="container relative mx-auto grid gap-10 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
+          <div className="max-w-3xl">
+            <motion.span
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.28em] text-teal-50 backdrop-blur-sm"
+            >
+              Services
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="mt-6 text-balance text-5xl font-semibold leading-tight text-white md:text-6xl"
+            >
+              PASA services designed around practical support and real-life outcomes.
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="mt-6 max-w-2xl text-lg text-teal-50/85 md:text-xl"
+            >
+              Our services are shaped to support dignity, consistency,
+              community participation, and stronger daily independence for the
+              people and families we serve.
+            </motion.p>
+          </div>
 
-          <motion.p
-            className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed text-gray-200"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <motion.div
+            initial={{ opacity: 0, x: 28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.18 }}
+            className="rounded-[34px] border border-white/15 bg-white/10 p-7 backdrop-blur-md"
           >
-            At PASA Colorado, we deliver personalized, state-approved services
-            that promote independence, dignity, and meaningful community
-            connections across the state.
-          </motion.p>
+            <p className="text-sm uppercase tracking-[0.24em] text-teal-200">Service approach</p>
+            <div className="mt-5 grid gap-4">
+              {serviceHighlights.map((item) => (
+                <div key={item} className="rounded-[22px] border border-white/10 bg-white/5 px-5 py-4">
+                  <p className="text-base text-teal-50/85">{item}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ===================== Services Section ===================== */}
-      <section className="relative py-24 bg-gradient-to-b from-white via-teal-50 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(13,148,136,0.15),transparent_70%)]"></div>
-        <div className="container relative z-10 mx-auto px-6 lg:px-12">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Our Comprehensive PASA Services
+      <section className="bg-[var(--surface)] py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="text-sm uppercase tracking-[0.24em] text-teal-800">What we provide</p>
+            <h2 className="mt-4 text-balance text-4xl">
+              A more modern, easier-to-scan presentation of our service areas.
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Every service we provide is built around compassion, inclusion,
-              and a commitment to helping every individual thrive.
-            </p>
-          </motion.div>
+          </div>
 
-          <div className="space-y-20">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {services.map((service, index) => {
               const Icon = service.icon
               return (
                 <motion.div
-                  key={index}
-                  className={`flex flex-col md:flex-row items-center gap-10 ${
-                    index % 2 === 0
-                      ? "md:flex-row"
-                      : "md:flex-row-reverse md:text-right"
-                  }`}
-                  initial={{ opacity: 0, y: 50 }}
+                  key={service.title}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.45, delay: index * 0.05 }}
                   viewport={{ once: true }}
+                  className="rounded-[30px] border border-stone-200 bg-white p-7 shadow-[0_20px_65px_-45px_rgba(20,40,29,0.45)]"
                 >
-                  <div className="relative flex-shrink-0">
-                    <motion.div
-                      className="bg-white/60 dark:bg-gray-800/40 backdrop-blur-lg rounded-full p-10 shadow-xl border border-teal-200 dark:border-teal-700 hover:shadow-2xl transition-all"
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      <Icon className="w-14 h-14 text-teal-700 dark:text-teal-300" />
-                    </motion.div>
-                    <div className="absolute inset-0 blur-2xl bg-teal-400/20 rounded-full -z-10"></div>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-800">
+                    <Icon className="h-7 w-7" />
                   </div>
-
-                  <div className="max-w-xl">
-                    <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
+                  <h3 className="mt-5 text-2xl">{service.title}</h3>
+                  <p className="mt-3 text-base text-slate-600">{service.description}</p>
                 </motion.div>
               )
             })}
@@ -168,36 +174,164 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ===================== CTA Section ===================== */}
-      <section className="relative py-24 bg-gradient-to-r from-teal-800 via-teal-700 to-teal-900 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent_70%)]"></div>
-        <motion.h3
-          className="text-4xl md:text-5xl font-bold mb-6 text-white"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Ready to Experience Compassionate PASA Care?
-        </motion.h3>
-        <motion.p
-          className="text-lg mb-10 max-w-3xl mx-auto text-gray-200"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Let’s build a care plan together that prioritizes your goals,
-          independence, and quality of life.
-        </motion.p>
-        <motion.a
-          href="/contact"
-          className="relative inline-block px-10 py-5 rounded-full text-lg font-semibold text-teal-900 bg-white shadow-2xl hover:scale-105 transition-transform duration-300"
-          whileHover={{ scale: 1.08 }}
-        >
-          <span className="relative z-10">Contact Us Today</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-300 via-teal-200 to-white rounded-full blur-xl opacity-60 animate-pulse"></div>
-        </motion.a>
+      <section className="bg-stone-100/80 py-20">
+        <div className="container mx-auto grid gap-8 px-4 sm:px-6 lg:grid-cols-[0.98fr_1.02fr] lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="rounded-[34px] bg-[linear-gradient(135deg,#0f766e_0%,#103330_100%)] p-8 text-white"
+          >
+            <p className="text-sm uppercase tracking-[0.24em] text-teal-200">Why it matters</p>
+            <h2 className="mt-4 text-balance text-4xl text-white">
+              Good services feel organized, respectful, and responsive.
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-teal-50/82">
+              Families need more than a list of offerings. They need to know
+              how support will feel in practice: clear communication, reliable
+              follow-through, and services aligned with everyday goals.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            viewport={{ once: true }}
+            className="overflow-hidden rounded-[34px] border border-stone-200 bg-white shadow-[0_26px_80px_-48px_rgba(20,40,29,0.45)]"
+          >
+            <div className="relative h-72">
+              <Image src="/images/community_support.jpg" alt="Community support" fill className="object-cover" />
+            </div>
+            <div className="p-8">
+              <p className="text-sm uppercase tracking-[0.24em] text-teal-800">Service philosophy</p>
+              <p className="mt-4 text-lg text-slate-600">
+                Every service line is delivered through a person-centered lens,
+                with attention to dignity, participation, and the routines that
+                shape each individual&apos;s day-to-day experience.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#06302e_0%,#0f766e_48%,#2dd4bf_100%)] py-20">
+        <div className="hero-grid absolute inset-0 opacity-20" />
+        <motion.div
+          aria-hidden="true"
+          animate={{ y: [0, -18, 0], scale: [1, 1.04, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-teal-200/25 blur-3xl"
+        />
+        <motion.div
+          aria-hidden="true"
+          animate={{ y: [0, 16, 0], scale: [1, 1.06, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-white/20 blur-3xl"
+        />
+
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            viewport={{ once: true }}
+            className="mx-auto grid max-w-5xl overflow-hidden rounded-[36px] border border-white/20 bg-white/95 text-left shadow-[0_34px_110px_-52px_rgba(6,48,46,0.72)] backdrop-blur-md lg:grid-cols-[1.08fr_0.92fr]"
+          >
+            <div className="relative p-8 sm:p-10 lg:p-12">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.12 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-teal-800"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                Support guidance
+              </motion.div>
+              <h2 className="mt-6 text-balance text-4xl font-semibold text-slate-950 md:text-5xl">
+                Need help choosing the right support path?
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                Our team can talk through service fit, next steps, and how support may align with your needs.
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                {supportPathHighlights.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: 0.18 + index * 0.08 }}
+                    viewport={{ once: true }}
+                    className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm"
+                  >
+                    <CheckCircle2 className="h-4 w-4 text-teal-700" />
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-full bg-teal-700 px-8 text-white shadow-[0_18px_40px_-22px_rgba(15,118,110,0.95)] hover:bg-teal-800"
+                  >
+                    <Link href="/contact">
+                      Contact Our Team
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="rounded-full border-teal-200 bg-white px-8 text-teal-900 hover:bg-teal-50"
+                  >
+                    <Link href="/faq">Read FAQs</Link>
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
+
+            <div className="relative min-h-[320px] overflow-hidden bg-[linear-gradient(145deg,#0f766e_0%,#123c39_100%)] p-8 text-white sm:p-10 lg:p-12">
+              <div className="absolute inset-0 opacity-25">
+                <Image src="/images/community_support.jpg" alt="Support conversation" fill className="object-cover" />
+              </div>
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,60,57,0.22),rgba(5,25,24,0.84))]" />
+              <motion.div
+                aria-hidden="true"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+                className="absolute -right-20 -top-20 h-52 w-52 rounded-full border border-white/20"
+              />
+              <div className="relative flex h-full flex-col justify-between">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/15 bg-white/12 text-teal-100 backdrop-blur-md">
+                  <MessageCircle className="h-8 w-8" />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.24 }}
+                  viewport={{ once: true }}
+                  className="mt-16 rounded-[28px] border border-white/15 bg-white/12 p-6 backdrop-blur-md"
+                >
+                  <p className="text-sm uppercase tracking-[0.22em] text-teal-100">
+                    Start with clarity
+                  </p>
+                  <p className="mt-3 text-lg leading-7 text-white">
+                    A quick conversation can make the service options easier to understand before you decide what comes next.
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
     </div>
   )

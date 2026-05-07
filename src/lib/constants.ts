@@ -1,13 +1,23 @@
-import { Heart, Apple, Zap, Target } from "lucide-react"
+import {
+  BriefcaseMedical,
+  Compass,
+  HeartHandshake,
+  Home,
+  ShieldCheck,
+  Users,
+} from "lucide-react"
 
 export const SITE_CONFIG = {
   name: "Wellness Health Care LLC",
-  description: "Your Journey to Holistic Well-being Starts Here",
-  url: "https://yodit-wellness.com",
-  ogImage: "/logo.png",
+  description:
+    "Colorado PASA services focused on person-centered support, community inclusion, and dependable care coordination.",
+  url: "https://wellnesshealthcareco.com",
+  ogImage: "/og-image.jpg",
   links: {
-    twitter: "https://twitter.com/yoditwellness",
-    github: "https://github.com/yodit-wellness",
+    facebook: "https://www.facebook.com/profile.php?id=61582141343241",
+    instagram: "https://www.instagram.com/wellness_colorado",
+    linkedin: "https://www.linkedin.com/company/wellness-health-care-llc/",
+    tiktok: "http://tiktok.com/@wellnesshealthcare2025",
   },
 }
 
@@ -15,102 +25,67 @@ export const NAVIGATION = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "Testimonials", href: "/testimonials" },
+  { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ]
 
 export const SERVICES = [
   {
-    id: "holistic-therapy",
-    title: "Holistic Therapy",
-    description: "Comprehensive wellness approach integrating mind, body, and spirit for complete healing.",
-    icon: Heart,
-    href: "/services/holistic-therapy",
+    id: "community-connector",
+    title: "Community Connector",
+    description:
+      "Support for participating in community life, building confidence, and pursuing meaningful goals.",
+    icon: Compass,
+    href: "/services",
   },
   {
-    id: "nutrition-counseling",
-    title: "Nutrition Counseling",
-    description: "Personalized nutrition plans to support your health goals and lifestyle.",
-    icon: Apple,
-    href: "/services/nutrition-counseling",
+    id: "homemaker-personal-care",
+    title: "Personal Care and Homemaker",
+    description:
+      "Practical daily support that helps individuals remain safe, comfortable, and active at home.",
+    icon: Home,
+    href: "/services",
   },
   {
-    id: "stress-management",
-    title: "Stress Management",
-    description: "Evidence-based techniques to reduce stress and improve mental well-being.",
-    icon: Zap,
-    href: "/services/stress-management",
+    id: "respite",
+    title: "Respite Support",
+    description:
+      "Reliable relief for families and caregivers while maintaining continuity of care and dignity.",
+    icon: HeartHandshake,
+    href: "/services",
   },
   {
-    id: "wellness-coaching",
-    title: "Wellness Coaching",
-    description: "One-on-one guidance to help you achieve your personal wellness goals.",
-    icon: Target,
-    href: "/services/wellness-coaching",
+    id: "health-coordination",
+    title: "Health and Wellness Support",
+    description:
+      "Routine health oversight, communication support, and coordination that keeps care plans moving.",
+    icon: BriefcaseMedical,
+    href: "/services",
+  },
+  {
+    id: "skills-training",
+    title: "Independent Living Skills",
+    description:
+      "Training that strengthens confidence with routines, decision-making, and everyday self-direction.",
+    icon: Users,
+    href: "/services",
+  },
+  {
+    id: "safety-supervision",
+    title: "Safety and Supervision",
+    description:
+      "Attentive, person-centered supervision that protects health, welfare, and peace of mind.",
+    icon: ShieldCheck,
+    href: "/services",
   },
 ]
 
-export const TESTIMONIALS = [
-  {
-    id: "testimonial-1",
-    name: "Sarah Johnson",
-    role: "Marketing Director",
-    content: "After years of chronic stress and burnout, Yodit Wellness gave me my life back. The holistic approach didn't just treat my symptoms—it transformed my entire relationship with health and well-being. I've never felt more balanced, energized, and truly alive.",
-    rating: 5,
-    service: "Holistic Therapy",
-    result: "6 months of transformation",
-  },
-  {
-    id: "testimonial-2",
-    name: "Michael Chen",
-    role: "Software Engineer",
-    content: "As a developer, I was constantly stressed and struggling with anxiety. The stress management program here taught me techniques that actually work in real life. My productivity has doubled, and I finally sleep through the night. This isn't just therapy—it's life-changing.",
-    rating: 5,
-    service: "Stress Management",
-    result: "Anxiety-free for 8 months",
-  },
-  {
-    id: "testimonial-3",
-    name: "Emily Rodriguez",
-    role: "Elementary Teacher",
-    content: "I was skeptical about nutrition counseling, but the personalized approach here completely changed my perspective. I learned to fuel my body properly, and the results speak for themselves—I've lost 30 pounds, gained incredible energy, and feel confident for the first time in years.",
-    rating: 5,
-    service: "Nutrition Counseling",
-    result: "30 lbs lost, energy restored",
-  },
-  {
-    id: "testimonial-4",
-    name: "David Thompson",
-    role: "Business Owner",
-    content: "Running my own business was consuming my life until I found Yodit Wellness. The coaching sessions helped me establish boundaries, create sustainable habits, and find work-life balance. I'm more successful in business and happier at home than I ever thought possible.",
-    rating: 5,
-    service: "Wellness Coaching",
-    result: "Perfect work-life balance",
-  },
-  {
-    id: "testimonial-5",
-    name: "Lisa Wang",
-    role: "Yoga Instructor",
-    content: "Even as a wellness professional, I was struggling with my own health journey. The team at Yodit Wellness provided the support and expertise I needed to heal from the inside out. Their holistic approach is truly revolutionary—I now help my own clients with techniques I learned here.",
-    rating: 5,
-    service: "Holistic Therapy",
-    result: "Healed and empowered",
-  },
-  {
-    id: "testimonial-6",
-    name: "Robert Martinez",
-    role: "Retired Teacher",
-    content: "At 65, I thought my best years were behind me. The stress management program proved me wrong. I've discovered a new lease on life, with energy I haven't had in decades. My family can't believe the positive changes—I feel like I'm 20 years younger!",
-    rating: 5,
-    service: "Stress Management",
-    result: "Youthful energy restored",
-  },
-]
 export const CONTACT_INFO = {
   phone: "+1 720 552 1710",
-  email: "Wellnesshealthcare2025@gmail.com",
-  address: `14291 E 4th Ave Aurora, CO 80011
-Suite 7-110`,
-  hours: "Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed",
+  email: "wellnesshealthcare2025@gmail.com",
+  addressLine1: "14291 E 4th Ave",
+  addressLine2: "Suite 7-110",
+  cityStateZip: "Aurora, CO 80011",
+  hours:
+    "Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: By appointment\nSunday: Closed",
 }
-

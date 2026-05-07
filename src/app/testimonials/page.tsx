@@ -1,232 +1,134 @@
 "use client"
 
-import * as React from "react"
-import { motion, useMotionValue, animate } from "framer-motion"
-import { Star, Quote, Smile, Heart } from "lucide-react"
-import { TestimonialCard } from "@/components/testimonial-card"
-import { Button } from "@/components/ui/button"
-import { TESTIMONIALS } from "@/lib/constants"
+import { motion } from "framer-motion"
 import Link from "next/link"
+import { ArrowRight, CheckCircle2, HeartHandshake, ShieldCheck, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-// ✅ Animated number component
-function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const [display, setDisplay] = React.useState(0)
-  const count = useMotionValue(0)
-
-  React.useEffect(() => {
-    const controls = animate(count, value, {
-      duration: 2,
-      ease: "easeOut",
-      onUpdate: (latest) => setDisplay(latest),
-    })
-    return () => controls.stop()
-  }, [value, count])
-
-  const formatted = Number(display.toFixed(value % 1 !== 0 ? 1 : 0))
-  return (
-    <span>
-      {formatted}
-      {suffix}
-    </span>
-  )
-}
-
-// ✅ Additional testimonials
-const additionalTestimonials = [
+const commitments = [
   {
-    id: "testimonial-5",
-    name: "Lisa Wang",
-    role: "Yoga Instructor",
-    content:
-      "The holistic approach at PASA Wellness has completely transformed my understanding of health. The team's expertise and genuine care made all the difference in my wellness journey.",
-    rating: 5,
+    title: "Person-centered planning",
+    description:
+      "Services are built around the individual, not around a generic program template.",
+    icon: HeartHandshake,
   },
   {
-    id: "testimonial-6",
-    name: "Robert Martinez",
-    role: "Retired Teacher",
-    content:
-      "After years of struggling with stress and anxiety, the stress management program here gave me the tools I needed to find peace and balance in my life.",
-    rating: 5,
+    title: "Health and welfare oversight",
+    description:
+      "We keep safety, communication, and continuity at the center of service delivery.",
+    icon: ShieldCheck,
   },
   {
-    id: "testimonial-7",
-    name: "Jennifer Kim",
-    role: "Graphic Designer",
-    content:
-      "The nutrition counseling service was a game-changer for me. I learned how to nourish my body properly and feel more energetic than I have in years.",
-    rating: 5,
-  },
-  {
-    id: "testimonial-8",
-    name: "Thomas Anderson",
-    role: "Software Developer",
-    content:
-      "The wellness coaching sessions helped me develop healthy habits that I've been able to maintain long-term. I'm grateful for the ongoing support and guidance.",
-    rating: 5,
+    title: "Family collaboration",
+    description:
+      "We work closely with families, case managers, and care teams so support stays aligned.",
+    icon: Users,
   },
 ]
 
-const allTestimonials = [...TESTIMONIALS, ...additionalTestimonials]
+const trustPoints = [
+  "Clear intake and referral communication",
+  "Respectful coordination with families and support teams",
+  "Service delivery focused on dignity and consistency",
+  "A professional presentation that reflects PASA expectations",
+]
 
 export default function TestimonialsPage() {
-  const stats = [
-    {
-      number: 500,
-      suffix: "+",
-      label: "Happy Clients",
-      icon: <Smile className="h-10 w-10 text-teal-600 mb-2" />, // ✅ unified color
-    },
-    {
-      number: 4.9,
-      suffix: "",
-      label: "Average Rating",
-      icon: <Star className="h-10 w-10 text-teal-600 mb-2" />,
-    },
-    {
-      number: 95,
-      suffix: "%",
-      label: "Success Rate",
-      icon: <Heart className="h-10 w-10 text-teal-600 mb-2" />,
-    },
-  ]
-
   return (
-    <div className="flex flex-col space-y-16">
-      {/* ✅ Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-teal-600 to-teal-400 text-white overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto px-4 text-center relative z-10"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Client Testimonials</h1>
-          <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
-            Stories of transformation and care from people we proudly serve across Colorado.
-          </p>
-        </motion.div>
-        <div className="absolute inset-0 bg-[url('/images/care.jpg')] bg-cover bg-center opacity-20"></div>
-      </section>
-
-      {/* ✅ Stats Section */}
-      <section className="py-16 bg-gradient-to-tr from-teal-50 to-white dark:from-gray-800 dark:to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="p-8 bg-white dark:bg-gray-800 rounded-3xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105 flex flex-col items-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                {stat.icon}
-                <div className="text-5xl md:text-6xl font-extrabold text-teal-600 mb-2">
-                  <AnimatedNumber value={stat.number} suffix={stat.suffix} />
-                </div>
-                <div className="text-lg text-gray-700 dark:text-gray-300 font-semibold">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+    <div className="flex flex-col">
+      <section className="bg-[linear-gradient(135deg,#0d3d3a_0%,#135f59_50%,#1c7f73_100%)] py-20 text-white">
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-3xl"
+          >
+            <p className="text-sm uppercase tracking-[0.28em] text-teal-300">
+              Quality and trust
+            </p>
+            <h1 className="mt-4 text-balance text-5xl font-semibold text-white">
+              Families need confidence in how support is delivered.
+            </h1>
+            <p className="mt-6 text-lg text-teal-50/85">
+              Instead of relying on generic marketing claims, this page focuses
+              on the values and service standards that shape our PASA work in
+              Colorado.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* ✅ Featured Testimonial */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="bg-[var(--surface)] py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Quote className="h-12 w-12 text-teal-600 mx-auto mb-6" />
-            <blockquote className="text-2xl md:text-3xl font-medium text-gray-900 dark:text-white mb-8 leading-relaxed">
-              The holistic approach at PASA Wellness has completely transformed my life. I feel more balanced,
-              energized, and at peace than I ever thought possible. The team’s expertise and genuine care made all the
-              difference in my journey.
-            </blockquote>
-            <div className="flex items-center justify-center space-x-4">
-              <div className="flex items-center">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-teal-600" />
-                ))}
-              </div>
-              <div className="text-left">
-                <div className="font-semibold text-gray-900 dark:text-white">Sarah Johnson</div>
-                <div className="text-gray-600 dark:text-gray-400">Marketing Director</div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ✅ All Testimonials Grid */}
-      <section className="py-16 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Real stories from real people who have experienced the compassionate care and support of PASA programs.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {allTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <TestimonialCard {...testimonial} />
-              </motion.div>
-            ))}
+          <div className="grid gap-6 md:grid-cols-3">
+            {commitments.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  viewport={{ once: true }}
+                  className="rounded-[30px] border border-stone-200 bg-white p-8 shadow-[0_18px_65px_-45px_rgba(20,40,29,0.45)]"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-800">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <h2 className="mt-5 text-2xl">{item.title}</h2>
+                  <p className="mt-3 text-base text-slate-600">{item.description}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* ✅ CTA Section */}
-      <section className="py-20 bg-teal-600 dark:bg-teal-700">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Ready to Start Your Transformation?
-            </h2>
-            <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
-              Join hundreds of satisfied clients who have achieved their goals with PASA-approved services.
+      <section className="bg-stone-100 py-20">
+        <div className="container mx-auto grid gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+          <div className="rounded-[34px] bg-white p-8 shadow-[0_24px_70px_-46px_rgba(20,40,29,0.45)]">
+            <p className="text-sm uppercase tracking-[0.24em] text-teal-800">
+              What families should expect
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="rounded-full">
-                <Link href="/contact">Book Your Consultation</Link>
+            <div className="mt-6 space-y-4">
+              {trustPoints.map((point) => (
+                <div key={point} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 text-teal-700" />
+                  <p className="text-base text-slate-700">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[34px] bg-teal-950 p-8 text-white shadow-[0_24px_70px_-46px_rgba(20,40,29,0.6)]">
+            <p className="text-sm uppercase tracking-[0.24em] text-teal-300">
+              A better standard
+            </p>
+            <p className="mt-6 text-lg text-teal-50/85">
+              Professional design matters for healthcare-adjacent services. A
+              clearer, calmer website helps families trust the information,
+              understand the process, and take the next step with less friction.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Button
+                asChild
+                className="rounded-full bg-teal-400 text-white hover:bg-teal-300"
+              >
+                <Link href="/contact">
+                  Talk with our team
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
               <Button
                 asChild
-                size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-teal-600 rounded-full"
+                className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white hover:text-teal-950"
               >
-                <Link href="/services">Explore Our Services</Link>
+                <Link href="/services">Review services</Link>
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

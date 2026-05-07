@@ -1,269 +1,178 @@
 "use client"
 
 import * as React from "react"
+import { motion } from "framer-motion"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Sun, Moon, Facebook, Instagram, Linkedin, Phone, Mail } from "lucide-react"
-import Image from "next/image"
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  X,
+} from "lucide-react"
 import { Button } from "./ui/button"
-import { useTheme } from "./theme-provider"
-import { NAVIGATION as BASE_NAV } from "@/lib/constants"
+import { CONTACT_INFO, NAVIGATION, SITE_CONFIG } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-// ✅ Add FAQ to the navigation
-const NAVIGATION = [
-    ...BASE_NAV,
-    { name: "FAQ", href: "/faq" }, // New FAQ Menu Item
-]
-
 export function Navbar() {
-    const [isOpen, setIsOpen] = React.useState(false)
-    const pathname = usePathname()
-    const { theme, setTheme } = useTheme()
+  const [isOpen, setIsOpen] = React.useState(false)
+  const pathname = usePathname()
 
-    const toggleTheme = () => {
-        setTheme(theme === "light" ? "dark" : "light")
-    }
+  const isActive = (href: string) =>
+    href === "/" ? pathname === href : pathname.startsWith(href)
 
-    const isActive = (href: string) => {
-        if (href === "/") return pathname === "/"
-        return pathname.startsWith(href)
-    }
-
-    return (
-        <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-white/80 backdrop-blur-xl dark:bg-gray-900/80 transition-all">
-
-            {/* ===================== Top Info Bar ===================== */}
-
-            <div className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between py-3 space-y-2 md:space-y-0">
-
-                    {/* Contact Info */}
-
-                    <div className="flex flex-col md:flex-row md:items-center md:space-x-6 text-center md:text-left">
-
-                        <a
-                            href="tel:+17205521710"
-                            className="flex items-center justify-center space-x-2 hover:opacity-90 transition"
-                        >
-                            <Phone className="h-4 w-4" />
-                            <span className="font-medium">+1 720 552 1710</span>
-                        </a>
-
-                        <a
-                            href="mailto:Wellnesshealthcare2025@gmail.com"
-                            className="flex items-center justify-center space-x-2 hover:opacity-90 transition"
-                        >
-                            <Mail className="h-4 w-4" />
-                            <span className="font-medium">wellnesshealthcare2025@gmail.com</span>
-                        </a>
-
-                    </div>
-
-                    {/* Social Links */}
-
-                    <div className="flex items-center space-x-4">
-
-                        <a
-                            href="https://www.facebook.com/profile.php?id=61582141343241"
-                            target="_blank"
-                            className="hover:scale-110 transition"
-                        >
-                            <Facebook className="h-4 w-4" />
-                        </a>
-
-                        <a
-                            href="https://www.instagram.com/wellness_colorado"
-                            target="_blank"
-                            className="hover:scale-110 transition"
-                        >
-                            <Instagram className="h-4 w-4" />
-                        </a>
-
-                        <a
-                            href="https://www.linkedin.com/company/wellness-health-care-llc/"
-                            target="_blank"
-                            className="hover:scale-110 transition"
-                        >
-                            <Linkedin className="h-4 w-4" />
-                        </a>
-
-                        <a
-                            href="http://tiktok.com/@wellnesshealthcare2025"
-                            target="_blank"
-                            className="hover:scale-110 transition"
-                        >
-                            <Image
-                                src="/images/tiktok.png"
-                                alt="TikTok"
-                                width={20}
-                                height={20}
-                            />
-                        </a>
-
-                    </div>
-
-                </div>
+  return (
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-transparent text-white">
+      <div className="brand-shimmer relative overflow-hidden border-b border-white/10 text-stone-100">
+        <div className="chrome-grid absolute inset-0 opacity-30" />
+        <div className="pointer-events-none absolute -left-8 top-0 h-24 w-24 rounded-full bg-teal-300/10 blur-2xl" />
+        <div className="container relative mx-auto flex flex-col gap-2 px-4 py-3 text-sm sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-6">
+            <a className="flex items-center gap-2 text-stone-100/85 transition hover:text-white" href={`tel:${CONTACT_INFO.phone}`}>
+              <Phone className="h-4 w-4 text-teal-200" />
+              <span>{CONTACT_INFO.phone}</span>
+            </a>
+            <a className="flex items-center gap-2 text-stone-100/85 transition hover:text-white" href={`mailto:${CONTACT_INFO.email}`}>
+              <Mail className="h-4 w-4 text-teal-200" />
+              <span>{CONTACT_INFO.email}</span>
+            </a>
+          </div>
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-stone-100/75">
+              <MapPin className="h-4 w-4 text-teal-200" />
+              <span>Aurora, Colorado</span>
             </div>
+            <div className="flex items-center gap-3">
+              <a aria-label="Facebook" className="text-stone-100/70 transition hover:text-white" href={SITE_CONFIG.links.facebook} rel="noreferrer" target="_blank">
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a aria-label="Instagram" className="text-stone-100/70 transition hover:text-white" href={SITE_CONFIG.links.instagram} rel="noreferrer" target="_blank">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a aria-label="LinkedIn" className="text-stone-100/70 transition hover:text-white" href={SITE_CONFIG.links.linkedin} rel="noreferrer" target="_blank">
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a aria-label="TikTok" className="text-stone-100/70 transition hover:text-white" href={SITE_CONFIG.links.tiktok} rel="noreferrer" target="_blank">
+                <Image src="/images/tiktok.png" alt="TikTok" width={16} height={16} className="object-contain opacity-90 transition hover:opacity-100" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            {/* ===================== Main Navbar ===================== */}
+      <div className="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,rgba(7,27,26,0.92)_0%,rgba(9,19,17,0.82)_100%)] backdrop-blur-xl">
+        <div className="chrome-grid absolute inset-0 opacity-15" />
+        <div className="pointer-events-none absolute left-20 top-0 h-20 w-48 rounded-full bg-teal-300/10 blur-3xl" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-20 items-center justify-between">
+            <Link className="group relative z-20 flex items-center gap-3" href="/">
+              <motion.div
+                className="relative h-14 w-14 shrink-0"
+                whileHover={{ scale: 2.35, rotate: [0, -4, 4, 0] }}
+                whileTap={{ scale: 1.85 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+              >
+                <motion.div
+                  aria-hidden="true"
+                  className="absolute inset-[-8px] rounded-full bg-teal-300/25 blur-xl opacity-0"
+                  whileHover={{ opacity: 1, scale: 1.15 }}
+                  transition={{ duration: 0.25 }}
+                />
+                <Image
+                  src="/images/logo.png"
+                  alt="Wellness Health Care logo"
+                  width={56}
+                  height={56}
+                  className="relative rounded-full border border-white/25 bg-white object-contain p-1 shadow-[0_16px_35px_-18px_rgba(45,212,191,0.6)]"
+                />
+              </motion.div>
+              <div>
+                <p className="text-lg font-semibold leading-none text-white">
+                  Wellness Health Care
+                </p>
+                <p className="mt-1 text-xs uppercase tracking-[0.24em] text-teal-200">
+                  Colorado PASA Services
+                </p>
+              </div>
+            </Link>
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div className="flex h-20 items-center justify-between">
-
-                    {/* Logo */}
-
-                    <Link href="/" className="flex items-center space-x-3">
-
-                        <Image
-                            src="/images/logo.png"
-                            alt="Wellness Health Care"
-                            width={60}
-                            height={60}
-                            className="object-contain"
-                        />
-
-                        <span className="font-semibold text-lg md:text-xl text-teal-600 dark:text-teal-400 tracking-wide">
-                            Wellness Health Care
-                        </span>
-
-                    </Link>
-
-                    {/* Desktop Menu */}
-
-                    <nav className="hidden md:flex items-center space-x-8">
-
-                        {NAVIGATION.map((item) => (
-
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className={cn(
-                                    "group relative text-sm font-medium transition-colors duration-300",
-                                    isActive(item.href)
-                                        ? "text-teal-600 dark:text-teal-400"
-                                        : "text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400"
-                                )}
-                            >
-
-                                {item.name}
-
-                                <span
-                                    className={cn(
-                                        "absolute left-0 -bottom-2 h-[2px] bg-teal-600 transition-all duration-300",
-                                        isActive(item.href)
-                                            ? "w-full"
-                                            : "w-0 group-hover:w-full"
-                                    )}
-                                ></span>
-
-                            </Link>
-
-                        ))}
-
-                        {/* CTA */}
-
-                        <Button
-                            asChild
-                            className="ml-4 rounded-full px-6 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white shadow-none transition-transform hover:scale-105"
-                        >
-
-                            <Link href="/contact">
-                                Request Services
-                            </Link>
-
-                        </Button>
-
-                    </nav>
-
-                    {/* Right Controls */}
-
-                    <div className="flex items-center space-x-3">
-
-                        {/* Theme Toggle */}
-
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={toggleTheme}
-                            className="h-9 w-9 rounded-full"
-                        >
-
-                            {theme === "light"
-                                ? <Moon className="h-4 w-4" />
-                                : <Sun className="h-4 w-4" />}
-
-                        </Button>
-
-                        {/* Mobile Menu */}
-
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="md:hidden h-9 w-9"
-                            onClick={() => setIsOpen(!isOpen)}
-                        >
-
-                            {isOpen
-                                ? <X className="h-5 w-5" />
-                                : <Menu className="h-5 w-5" />}
-
-                        </Button>
-
-                    </div>
-
-                </div>
-
-                {/* ===================== Mobile Menu ===================== */}
-
-                <div
-                    className={cn(
-                        "md:hidden overflow-hidden transition-all duration-300",
-                        isOpen ? "max-h-screen pb-6" : "max-h-0"
-                    )}
+            <nav className="hidden items-center gap-8 md:flex">
+              {NAVIGATION.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "relative text-sm font-semibold transition",
+                    isActive(item.href)
+                      ? "text-white"
+                      : "text-stone-100/80 hover:text-white",
+                  )}
                 >
+                  {item.name}
+                  <span
+                    className={cn(
+                      "absolute -bottom-2 left-0 h-0.5 rounded-full bg-teal-300 transition-all",
+                      isActive(item.href) ? "w-full" : "w-0",
+                    )}
+                  />
+                </Link>
+              ))}
+              <Link
+                href="/request-services/"
+                className="inline-flex h-10 items-center justify-center rounded-full bg-teal-400 px-6 text-sm font-semibold text-slate-950 shadow-[0_18px_36px_-18px_rgba(45,212,191,0.85)] transition hover:bg-teal-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-200 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-950"
+              >
+                Request Services
+              </Link>
+            </nav>
 
-                    <div className="pt-4 space-y-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-white/10 hover:text-white md:hidden"
+              onClick={() => setIsOpen((value) => !value)}
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
 
-                        {NAVIGATION.map((item) => (
-
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className={cn(
-                                    "block px-4 py-3 rounded-lg text-base font-medium transition",
-                                    isActive(item.href)
-                                        ? "bg-teal-50 text-teal-600 dark:bg-teal-900 dark:text-teal-400"
-                                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                                )}
-                                onClick={() => setIsOpen(false)}
-                            >
-
-                                {item.name}
-
-                            </Link>
-
-                        ))}
-
-                        <Button
-                            asChild
-                            className="w-full mt-3 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white"
-                        >
-
-                            <Link href="/contact">
-                                Request Services
-                            </Link>
-
-                        </Button>
-
-                    </div>
-
-                </div>
-
+          <div
+            className={cn(
+              "overflow-hidden transition-all duration-300 md:hidden",
+              isOpen ? "max-h-[420px] pb-6" : "max-h-0",
+            )}
+          >
+            <div className="space-y-2 border-t border-white/10 pt-4">
+              {NAVIGATION.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "block rounded-2xl px-4 py-3 font-medium transition",
+                    isActive(item.href)
+                      ? "bg-white/15 text-white"
+                      : "text-stone-100/85 hover:bg-white/10 hover:text-white",
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Link
+                href="/request-services/"
+                className="mt-2 inline-flex h-10 w-full items-center justify-center rounded-full bg-teal-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-teal-300"
+                onClick={() => setIsOpen(false)}
+              >
+                Request Services
+              </Link>
             </div>
-
-        </header>
-
-    )
+          </div>
+        </div>
+      </div>
+    </header>
+  )
 }

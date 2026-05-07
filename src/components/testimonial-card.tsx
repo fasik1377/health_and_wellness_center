@@ -53,7 +53,7 @@ export function TestimonialCard({ name, role, content, rating, service, result, 
               className={cn(
                 "h-6 w-6 transition-all duration-300",
                 i < rating
-                  ? "text-yellow-400 fill-current drop-shadow-sm"
+                  ? "text-teal-500 fill-current drop-shadow-sm"
                   : "text-gray-300 dark:text-gray-600"
               )}
             />
