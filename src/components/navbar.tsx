@@ -29,7 +29,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-transparent text-white">
       <div className="brand-shimmer relative overflow-hidden border-b border-white/10 text-stone-100">
-        <div className="chrome-grid absolute inset-0 opacity-30" />
+        <div className="pointer-events-none absolute inset-0 opacity-30 chrome-grid" />
         <div className="pointer-events-none absolute -left-8 top-0 h-24 w-24 rounded-full bg-teal-300/10 blur-2xl" />
         <div className="container relative mx-auto flex flex-col gap-2 px-4 py-3 text-sm sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-6">
@@ -66,9 +66,9 @@ export function Navbar() {
       </div>
 
       <div className="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,rgba(7,27,26,0.92)_0%,rgba(9,19,17,0.82)_100%)] backdrop-blur-xl">
-        <div className="chrome-grid absolute inset-0 opacity-15" />
+        <div className="pointer-events-none absolute inset-0 opacity-15 chrome-grid" />
         <div className="pointer-events-none absolute left-20 top-0 h-20 w-48 rounded-full bg-teal-300/10 blur-3xl" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             <Link className="group relative z-20 flex items-center gap-3" href="/">
               <motion.div
