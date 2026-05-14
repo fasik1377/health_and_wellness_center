@@ -99,10 +99,16 @@ export async function isAdminRequest(request: NextRequest) {
     return false
   }
 
-  const expectedSignature = await hmacSha256(
-    expiresAt,
-    getSessionSecret()
-  )
+  let expectedSignature = ""
+
+  try {
+    expectedSignature = await hmacSha256(
+      expiresAt,
+      getSessionSecret()
+    )
+  } catch {
+    return false
+  }
 
   return signature === expectedSignature
 }
