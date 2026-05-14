@@ -16,9 +16,16 @@ const quickTopics = [
 export function ChatIntake() {
   const [formData, setFormData] = React.useState({
     name: "",
+    email: "",
+    phone: "",
     topic: "",
     message: "",
   })
+  const [status, setStatus] = React.useState<{
+    type: "success" | "error"
+    message: string
+  } | null>(null)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -31,10 +38,50 @@ export function ChatIntake() {
     setFormData((prev) => ({ ...prev, topic }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    alert("Thanks for your message. Our team will follow up soon.")
-    setFormData({ name: "", topic: "", message: "" })
+    setIsSubmitting(true)
+    setStatus(null)
+
+    try {
+      const response = await fetch("/api/chat/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        setStatus({
+          type: "error",
+          message: result.message || "Unable to send your message.",
+        })
+        return
+      }
+
+      setStatus({
+        type: "success",
+        message: "Thanks. Your message was sent to our team.",
+      })
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        topic: "",
+        message: "",
+      })
+    } catch (error) {
+      console.error(error)
+      setStatus({
+        type: "error",
+        message: "Unable to send your message. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -116,6 +163,24 @@ export function ChatIntake() {
                 className="rounded-2xl"
                 required
               />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="rounded-2xl"
+                />
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="rounded-2xl"
+                />
+              </div>
               <Input
                 name="topic"
                 type="text"
@@ -134,8 +199,19 @@ export function ChatIntake() {
                 className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 text-slate-900 placeholder:text-stone-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
                 required
               />
+              {status && (
+                <div
+                  className={`rounded-2xl px-4 py-3 text-sm ${
+                    status.type === "success"
+                      ? "border border-emerald-200 bg-emerald-50 text-emerald-800"
+                      : "border border-red-200 bg-red-50 text-red-700"
+                  }`}
+                >
+                  {status.message}
+                </div>
+              )}
               <Button type="submit" size="lg" className="w-full rounded-full bg-teal-400 text-slate-950 hover:bg-teal-300">
-                Send Question
+                {isSubmitting ? "Sending..." : "Send Question"}
                 <Send className="ml-2 h-4 w-4" />
               </Button>
             </form>

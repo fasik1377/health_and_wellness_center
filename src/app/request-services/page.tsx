@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -16,6 +17,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CONTACT_INFO, SERVICES } from "@/lib/constants"
@@ -46,6 +48,58 @@ const formTopics = [
 ]
 
 export default function RequestServicesPage() {
+    const [loading, setLoading] = useState(false)
+  const [successMessage, setSuccessMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+    const handleSubmit = async (
+  event: React.FormEvent<HTMLFormElement>
+) => {
+  event.preventDefault()
+
+  const form = event.currentTarget
+
+  setLoading(true)
+  setSuccessMessage("")
+  setErrorMessage("")
+
+  try {
+    const formData = new FormData(form)
+
+    const topics = formData.getAll("topics")
+
+    const data = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      relationship: formData.get("relationship"),
+      topics,
+      message: formData.get("message"),
+    }
+
+    const response = await fetch("/api/request-services", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+
+    const result = await response.json()
+
+    if (!response.ok) {
+      throw new Error(result.error || "Something went wrong")
+    }
+
+    setSuccessMessage("Request submitted successfully!")
+
+    // RESET FORM
+    form.reset()
+  } catch (error: any) {
+    setErrorMessage(error.message || "Failed to submit request")
+  } finally {
+    setLoading(false)
+  }
+}
   return (
     <div className="flex flex-col">
       <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#2aa198_0%,#135f59_42%,#091311_100%)] py-24 text-white">
@@ -141,7 +195,7 @@ export default function RequestServicesPage() {
               This form is designed for first conversations. Please avoid sending urgent medical information here; call emergency services for emergencies.
             </p>
 
-            <form className="mt-8 grid gap-5">
+            <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
               <div className="grid gap-5 sm:grid-cols-2">
                 <Input required name="name" placeholder="Full name" className="rounded-2xl" />
                 <Input required name="phone" placeholder="Phone number" className="rounded-2xl" />
@@ -168,10 +222,26 @@ export default function RequestServicesPage() {
                 placeholder="Tell us what kind of support, questions, or next-step guidance you are looking for..."
                 className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 text-slate-900 placeholder:text-stone-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
               />
-              <Button type="submit" size="lg" className="rounded-full bg-teal-700 px-8 text-white hover:bg-teal-800">
-                Submit Request
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              {successMessage && (
+  <div className="rounded-2xl bg-green-100 px-4 py-3 text-green-800">
+    {successMessage}
+  </div>
+)}
+
+{errorMessage && (
+  <div className="rounded-2xl bg-red-100 px-4 py-3 text-red-800">
+    {errorMessage}
+  </div>
+)}
+             <Button
+  type="submit"
+  size="lg"
+  disabled={loading}
+  className="rounded-full bg-teal-700 px-8 text-white hover:bg-teal-800 disabled:opacity-70"
+>
+  {loading ? "Submitting..." : "Submit Request"}
+  {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
+</Button>
             </form>
           </motion.div>
 

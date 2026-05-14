@@ -9,6 +9,7 @@ import {
     CheckCircle2,
     CirclePlay,
     HeartHandshake,
+    Lock,
     MapPin,
     MessageCircle,
     Phone,
@@ -136,6 +137,33 @@ export default function HomePage() {
     return (
         <div className="overflow-hidden">
             <section className="relative isolate overflow-hidden border-b border-stone-200 bg-[linear-gradient(135deg,#2aa198_0%,#135f59_42%,#091311_100%)] text-white">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={`hero-bg-${activeHeroImage.src}`}
+                        initial={{ opacity: 0, scale: 1.08 }}
+                        animate={{ opacity: 0.36, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.04 }}
+                        transition={{ duration: 1.4, ease: "easeInOut" }}
+                        className="absolute inset-0"
+                    >
+                        <Image
+                            src={activeHeroImage.src}
+                            alt=""
+                            fill
+                            priority
+                            sizes="100vw"
+                            className="object-cover"
+                        />
+                    </motion.div>
+                </AnimatePresence>
+                <motion.div
+                    aria-hidden="true"
+                    animate={{
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    }}
+                    transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 bg-[linear-gradient(115deg,rgba(6,20,19,0.88)_0%,rgba(15,118,110,0.66)_44%,rgba(45,212,191,0.28)_100%)] bg-[length:200%_200%]"
+                />
                 <div className="brand-aurora absolute inset-0 pointer-events-none" />
                 <div className="hero-grid absolute inset-0 opacity-30 pointer-events-none" />
    
@@ -173,14 +201,15 @@ export default function HomePage() {
                                 Family-focused coordination
                             </span>
                         </div>
-                        <div className="relative z-30 mt-8 flex flex-col gap-4 sm:flex-row">
-                 <Link
-    href="/request-services"
-    className="inline-flex items-center justify-center rounded-full bg-teal-400 px-7 py-3 text-base font-semibold text-slate-950 shadow-[0_18px_40px_-16px_rgba(45,212,191,0.8)] hover:bg-teal-300"
->
-    Request Services
-    <ArrowRight className="ml-2 h-4 w-4" />
-</Link>
+                        <div className="relative z-30 mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+                            <Link
+                                href="/request-services"
+                                className="inline-flex items-center justify-center rounded-full bg-teal-400 px-7 py-3 text-base font-semibold text-slate-950 shadow-[0_18px_40px_-16px_rgba(45,212,191,0.8)] hover:bg-teal-300"
+                            >
+                                Request Services
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+
                             <Button
                                 asChild
                                 size="lg"
@@ -188,6 +217,17 @@ export default function HomePage() {
                                 className="rounded-full border-white/40 bg-white/5 px-7 text-base text-white hover:bg-white hover:text-teal-900"
                             >
                                 <Link href="/services">Explore Service Areas</Link>
+                            </Button>
+
+                            <Button
+                                asChild
+                                size="lg"
+                                className="rounded-full bg-white px-7 text-black hover:bg-slate-200"
+                            >
+                                <Link href="/admin/login">
+                                    <Lock className="mr-2 h-4 w-4" />
+                                    Admin Login
+                                </Link>
                             </Button>
                         </div>
                         <div className="mt-8 flex items-center gap-3 rounded-[26px] border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-md sm:max-w-md">
@@ -312,6 +352,8 @@ export default function HomePage() {
                     </motion.div>
                 </div>
             </section>
+
+            <ChatIntake />
 
             <section className="bg-[var(--surface)] py-20">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -534,8 +576,6 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
-
-            <ChatIntake />
 
             <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#06302e_0%,#0f766e_48%,#2dd4bf_100%)] py-20">
                 <div className="hero-grid absolute inset-0 opacity-20" />

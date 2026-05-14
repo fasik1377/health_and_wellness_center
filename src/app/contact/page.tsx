@@ -21,11 +21,53 @@ export default function ContactPage() {
     email: "",
     message: "",
   })
+  const [status, setStatus] = React.useState<{
+    type: "success" | "error"
+    message: string
+  } | null>(null)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    alert("Thank you for your message! We'll get back to you soon.")
-    setFormData({ name: "", email: "", message: "" })
+    setIsSubmitting(true)
+    setStatus(null)
+
+    try {
+      const response = await fetch("/api/chat/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          topic: "Contact form",
+        }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        setStatus({
+          type: "error",
+          message: result.message || "Unable to send your message.",
+        })
+        return
+      }
+
+      setStatus({
+        type: "success",
+        message: "Thanks. Your message was sent to our team.",
+      })
+      setFormData({ name: "", email: "", message: "" })
+    } catch (error) {
+      console.error(error)
+      setStatus({
+        type: "error",
+        message: "Unable to send your message. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -167,9 +209,25 @@ export default function ContactPage() {
                   onChange={handleChange}
                   className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 text-slate-900 placeholder:text-stone-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
                 />
-                <Button type="submit" size="lg" className="w-full rounded-full bg-teal-400 text-slate-950 hover:bg-teal-300">
-                  Send Message
-                  <Send className="ml-2 h-4 w-4" />
+                {status && (
+                  <div
+                    className={`rounded-2xl px-4 py-3 text-sm ${
+                      status.type === "success"
+                        ? "border border-emerald-200 bg-emerald-50 text-emerald-800"
+                        : "border border-red-200 bg-red-50 text-red-700"
+                    }`}
+                  >
+                    {status.message}
+                  </div>
+                )}
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmitting}
+                  className="w-full rounded-full bg-teal-400 text-slate-950 hover:bg-teal-300 disabled:opacity-70"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {!isSubmitting && <Send className="ml-2 h-4 w-4" />}
                 </Button>
               </form>
             </motion.div>

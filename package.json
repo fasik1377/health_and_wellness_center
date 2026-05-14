@@ -17,7 +17,9 @@
     "@radix-ui/react-slot": "^1.2.3",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.400.0",
+    "mongoose": "^9.6.2",
     "next": "14.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +27,7 @@
     "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.14.10",
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
