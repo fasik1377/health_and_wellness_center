@@ -3,6 +3,8 @@ import { isAdminRequest } from "@/lib/admin-auth"
 import { connectDB } from "@/lib/mongodb"
 import ChatMessage from "@/models/ChatMessage"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(request: NextRequest) {
   if (!(await isAdminRequest(request))) {
     return NextResponse.json(
