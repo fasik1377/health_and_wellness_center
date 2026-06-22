@@ -5,16 +5,25 @@ import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import {
+    Accessibility,
     ArrowRight,
+    Brain,
+    Bus,
     CheckCircle2,
+    ChevronLeft,
+    ChevronRight,
     CirclePlay,
     HeartHandshake,
+    HeartPulse,
+    Home,
     Lock,
     MapPin,
     MessageCircle,
+    Pill,
     Phone,
     Sparkles,
     ShieldCheck,
+    Utensils,
     Users,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -45,6 +54,75 @@ const highlights = [
         description:
             "We prioritize participation, belonging, and daily supports that help people stay engaged.",
         icon: Users,
+    },
+]
+
+const residentialSupports = [
+    {
+        title: "Self-Advocacy training",
+        description: "Coaching that helps each person speak up, make choices, and take part in planning.",
+        image: "/images/community_support1.jpg",
+        icon: HeartHandshake,
+    },
+    {
+        title: "Independent living skills training",
+        description: "Practical support for home routines, daily decisions, and confidence with everyday tasks.",
+        image: "/images/wellnesshome2.jpg",
+        icon: Home,
+    },
+    {
+        title: "Therapeutic or behavioral interventions",
+        description: "Steady support that reinforces therapeutic goals, emotional regulation, and positive routines.",
+        image: "/images/therapy.jpg",
+        icon: Brain,
+    },
+    {
+        title: "Routine medical and healthcare support",
+        description: "Help with appointments, wellness routines, documentation, and ongoing health awareness.",
+        image: "/images/care.jpg",
+        icon: HeartPulse,
+    },
+    {
+        title: "Community access support",
+        description: "Encouragement and assistance for activities, errands, events, and meaningful participation.",
+        image: "/images/outdoor_community.jpg",
+        icon: Users,
+    },
+    {
+        title: "Travel and transportation assistance",
+        description: "Safe, reliable support for getting to appointments, activities, and community destinations.",
+        image: "/images/travel_transport.jpg",
+        icon: Bus,
+    },
+    {
+        title: "Health and welfare supervision",
+        description: "Respectful supervision focused on stability, safety, dignity, and day-to-day wellbeing.",
+        image: "/images/quality_program.jpg",
+        icon: ShieldCheck,
+    },
+    {
+        title: "Medication administration support",
+        description: "Organized medication assistance that supports consistency and follows care requirements.",
+        image: "/images/medication.jpg",
+        icon: Pill,
+    },
+    {
+        title: "Meaningful relationship building",
+        description: "Opportunities to strengthen family, peer, and community connections that enrich daily life.",
+        image: "/images/group_wellness.jpg",
+        icon: HeartHandshake,
+    },
+    {
+        title: "Special diet accommodations",
+        description: "Meal and routine support that respects dietary needs, preferences, and health guidance.",
+        image: "/images/special_diet.jpg",
+        icon: Utensils,
+    },
+    {
+        title: "Accessible homes",
+        description: "Home environments arranged to support mobility, comfort, independence, and safety.",
+        image: "/images/homes.jpg",
+        icon: Accessibility,
     },
 ]
 
@@ -124,7 +202,15 @@ const heroImages = [
 
 export default function HomePage() {
     const [heroImageIndex, setHeroImageIndex] = React.useState(0)
+    const [residentialSlideIndex, setResidentialSlideIndex] = React.useState(0)
     const activeHeroImage = heroImages[heroImageIndex]
+    const visibleResidentialSupports = [0, 1, 2].map((offset) => {
+        const supportIndex = (residentialSlideIndex + offset) % residentialSupports.length
+        return {
+            ...residentialSupports[supportIndex],
+            supportIndex,
+        }
+    })
 
     React.useEffect(() => {
         const timer = window.setInterval(() => {
@@ -133,6 +219,24 @@ export default function HomePage() {
 
         return () => window.clearInterval(timer)
     }, [])
+
+    React.useEffect(() => {
+        const timer = window.setInterval(() => {
+            setResidentialSlideIndex((current) => (current + 1) % residentialSupports.length)
+        }, 4200)
+
+        return () => window.clearInterval(timer)
+    }, [])
+
+    const showPreviousResidentialSlide = () => {
+        setResidentialSlideIndex((current) =>
+            current === 0 ? residentialSupports.length - 1 : current - 1
+        )
+    }
+
+    const showNextResidentialSlide = () => {
+        setResidentialSlideIndex((current) => (current + 1) % residentialSupports.length)
+    }
 
     return (
         <div className="overflow-hidden">
@@ -386,6 +490,144 @@ export default function HomePage() {
                                 </motion.div>
                             )
                         })}
+                    </div>
+                </div>
+            </section>
+
+            <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#fffdf9_0%,#eef8f6_100%)] py-20">
+                <div className="hero-grid absolute inset-0 opacity-35" />
+                <motion.div
+                    aria-hidden="true"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+                    className="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full border border-teal-200/70"
+                />
+                <motion.div
+                    aria-hidden="true"
+                    animate={{ y: [0, -18, 0], scale: [1, 1.05, 1] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="pointer-events-none absolute -left-28 bottom-12 h-80 w-80 rounded-full bg-teal-200/30 blur-3xl"
+                />
+
+                <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                        <motion.div
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            viewport={{ once: true }}
+                            className="max-w-2xl"
+                        >
+                            <p className="text-sm uppercase tracking-[0.24em] text-teal-800">
+                                Residential services
+                            </p>
+                            <h2 className="mt-4 text-balance text-4xl">
+                                Support at home that builds independence, safety, and belonging.
+                            </h2>
+                            <p className="mt-5 text-lg leading-8 text-slate-600">
+                                Residential services can include hands-on daily support,
+                                health oversight, community participation, and home
+                                accommodations shaped around each person&apos;s needs.
+                            </p>
+                        </motion.div>
+
+                        <div className="flex items-center gap-3">
+                            <button
+                                type="button"
+                                onClick={showPreviousResidentialSlide}
+                                aria-label="Show previous residential support"
+                                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-teal-200 bg-white text-teal-900 shadow-sm transition hover:border-teal-700 hover:bg-teal-50"
+                            >
+                                <ChevronLeft className="h-5 w-5" />
+                            </button>
+                            <button
+                                type="button"
+                                onClick={showNextResidentialSlide}
+                                aria-label="Show next residential support"
+                                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-teal-700 text-white shadow-[0_16px_34px_-20px_rgba(15,118,110,0.9)] transition hover:bg-teal-800"
+                            >
+                                <ChevronRight className="h-5 w-5" />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="perspective-soft relative mt-12">
+                        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[84%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-200/30 blur-3xl" />
+                        <div className="grid gap-6 lg:grid-cols-3">
+                            <AnimatePresence mode="popLayout">
+                                {visibleResidentialSupports.map((support, index) => {
+                                const Icon = support.icon
+                                return (
+                                    <motion.div
+                                        key={`${support.title}-${support.supportIndex}`}
+                                        layout
+                                        initial={{ opacity: 0, x: 70, rotateY: -18, scale: 0.9 }}
+                                        animate={{
+                                            opacity: 1,
+                                            x: 0,
+                                            rotateY: index === 0 ? -7 : index === 2 ? 7 : 0,
+                                            y: index === 1 ? -18 : 8,
+                                            scale: index === 1 ? 1.04 : 0.96,
+                                            zIndex: index === 1 ? 2 : 1,
+                                        }}
+                                        exit={{ opacity: 0, x: -70, rotateY: 18, scale: 0.9 }}
+                                        whileHover={{ y: index === 1 ? -24 : 0, rotateY: 0, scale: 1.02 }}
+                                        transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+                                        className="group relative min-h-[430px] overflow-hidden rounded-[32px] border border-white/70 bg-white shadow-[0_30px_90px_-52px_rgba(20,40,29,0.68)]"
+                                    >
+                                        <div className="absolute inset-0">
+                                            <Image
+                                                src={support.image}
+                                                alt={support.title}
+                                                fill
+                                                sizes="(min-width: 1024px) 33vw, 100vw"
+                                                className="object-cover transition duration-700 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,27,26,0.06)_0%,rgba(7,27,26,0.34)_42%,rgba(7,27,26,0.86)_100%)]" />
+                                        </div>
+                                        <div className="relative flex h-full min-h-[430px] flex-col justify-between p-6 text-white">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/20 bg-white/15 text-teal-50 backdrop-blur-md">
+                                                    <Icon className="h-7 w-7" />
+                                                </div>
+                                                <span className="rounded-full border border-white/20 bg-white/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-teal-50 backdrop-blur-md">
+                                                    {String(support.supportIndex + 1).padStart(2, "0")}
+                                                </span>
+                                            </div>
+
+                                            <div className="rounded-[26px] border border-white/15 bg-white/12 p-5 backdrop-blur-md">
+                                                <p className="text-sm uppercase tracking-[0.22em] text-teal-100">
+                                                    Residential support
+                                                </p>
+                                                <h3 className="mt-3 text-2xl leading-tight text-white">
+                                                    {support.title}
+                                                </h3>
+                                                <p className="mt-3 text-base leading-7 text-teal-50/88">
+                                                    {support.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )
+                                })}
+                            </AnimatePresence>
+                        </div>
+
+                        <div className="mt-9 flex flex-wrap items-center justify-center gap-2">
+                            {residentialSupports.map((support, index) => (
+                                <button
+                                    key={support.title}
+                                    type="button"
+                                    onClick={() => setResidentialSlideIndex(index)}
+                                    aria-label={`Show ${support.title}`}
+                                    className={`h-2.5 rounded-full transition-all ${
+                                        index === residentialSlideIndex
+                                            ? "w-10 bg-teal-700"
+                                            : "w-2.5 bg-teal-200 hover:bg-teal-400"
+                                    }`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
