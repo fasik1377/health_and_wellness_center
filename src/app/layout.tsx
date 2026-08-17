@@ -75,28 +75,41 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "MedicalOrganization",
-  name: SITE_CONFIG.name,
-  description: SITE_CONFIG.description,
-  url: SITE_CONFIG.url,
-  logo: `${SITE_CONFIG.url}/images/logo.png`,
-  image: `${SITE_CONFIG.url}/og-image.jpg`,
-  telephone: CONTACT_INFO.phone,
-  email: CONTACT_INFO.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: `${CONTACT_INFO.addressLine1} ${CONTACT_INFO.addressLine2}`,
-    addressLocality: "Aurora",
-    addressRegion: "CO",
-    postalCode: "80011",
-    addressCountry: "US",
-  },
-  openingHours: ["Mo-Fr 09:00-18:00"],
-  sameAs: [
-    SITE_CONFIG.links.facebook,
-    SITE_CONFIG.links.instagram,
-    SITE_CONFIG.links.linkedin,
-    SITE_CONFIG.links.tiktok,
+  "@graph": [
+    {
+      "@type": "MedicalOrganization",
+      "@id": `${SITE_CONFIG.url}/#organization`,
+      name: SITE_CONFIG.name,
+      description: SITE_CONFIG.description,
+      url: SITE_CONFIG.url,
+      logo: `${SITE_CONFIG.url}/images/logo.png`,
+      image: `${SITE_CONFIG.url}/og-image.jpg`,
+      telephone: CONTACT_INFO.phone,
+      email: CONTACT_INFO.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `${CONTACT_INFO.addressLine1} ${CONTACT_INFO.addressLine2}`,
+        addressLocality: "Aurora",
+        addressRegion: "CO",
+        postalCode: "80011",
+        addressCountry: "US",
+      },
+      areaServed: {
+        "@type": "State",
+        name: "Colorado",
+      },
+      openingHours: ["Mo-Fr 09:00-18:00"],
+      sameAs: Object.values(SITE_CONFIG.links),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_CONFIG.url}/#website`,
+      url: SITE_CONFIG.url,
+      name: SITE_CONFIG.name,
+      description: SITE_CONFIG.description,
+      publisher: { "@id": `${SITE_CONFIG.url}/#organization` },
+      inLanguage: "en-US",
+    },
   ],
 }
 
